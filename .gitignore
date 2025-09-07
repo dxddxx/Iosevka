@@ -31,3 +31,6 @@ shared/fonts/imports/*/TTF/*
 
 # Platform specified files
 .DS_store
+
+# remove old build plans
+private-build-plans.toml.dx
