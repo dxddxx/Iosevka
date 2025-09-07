@@ -22,6 +22,11 @@ jobs:
           node-version: 'node' # 'node' resolves to the latest stable release
           architecture: 'x64'  # ensure x86_64 arch
 
+      - name: Install build dependencies (ttfautohint)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ttfautohint
+
       - name: Install dependencies
         run: npm install
 
