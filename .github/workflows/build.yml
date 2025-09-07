@@ -1,0 +1,36 @@
+name: Build Fonts
+
+on:
+  workflow_dispatch:
+    inputs:
+      plan:
+        description: "Plan name for build (used in npm run build -- contents::IosevkaTest)"
+        required: true
+        default: "default"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js (latest)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'node' # 'node' resolves to the latest stable release
+          architecture: 'x64'  # ensure x86_64 arch
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build fonts
+        run: npm run build -- contents::IosevkaTest
+
+      - name: Upload built fonts
+        uses: actions/upload-artifact@v4
+        with:
+          name: built-fonts
+          path: dist/
+          if-no-files-found: error
